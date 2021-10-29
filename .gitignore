@@ -1,0 +1,4 @@
+node_modules
+variables.env
+artciles.json
+.DS_STORE

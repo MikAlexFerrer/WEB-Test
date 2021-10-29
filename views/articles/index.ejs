@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Nunito:wght@200;400;600;800;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+    <title>Ramen Shoppe</title>
+</head>
+
+<body>
+
+    <!-- -------------------------------------------  NAVBAR & HEADER  ------------------------------------------------------->
+    <div class="header container-fluid">
+        <img class="logo" src="../imgs/logo.png" alt="" height="150px">
+
+        <ul class="nav container-fluid" id="toStick">
+            <li><a class="nav-items" href="/">HOME</a></li>
+            <li><a class="nav-items" href="../Other pages/About.html">ABOUT</a></li>
+            <li><a class="nav-items" href="../Other pages/Store.html">STORE</a></li>
+            <li><a class="nav-items" href="../Other pages/Contact.html">CONTACT</a></li>
+            <li><a class="nav-items" href="../Other pages/Resources.html">RESOURCES</a></li>
+        </ul>
+    </div>
+
+    <!-- -------------------------------------------  PAGE BODY  ------------------------------------------------------->
+
+    <div class="container-fluid" style="margin-top: 60px; max-width: 85%">
+        <div class="row">
+            <div class="col1-container col-sm-8">
+                <div class="banner-container">
+                    <img class="top-img" src="../imgs/Banner_v2.png" alt="">
+                    <div class="top-text">Welcome to the blog!</div>
+                    <div class="top-text-2">A place for all manga lovers</div>
+                </div>
+
+                <!-- ----------------- FEATURED MANGAKA ----------------- -->
+                <div class="mangaka-container">
+                    <div class="section-title">Featured Mangaka</div>
+                    <hr>
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-sm-2">
+                            <img class="mangaka-img" src="../imgs/mangaka_01.png" alt="">
+                        </div>
+                        <div class="col-sm-5" style="margin-left: 40px;">
+                            <div class="mangaka-title">Hagio Moto</div>
+                            <div class="mangaka-para">
+                                She is considered a "founding mother" of modern shōjo manga, especially shōnen-ai. She
+                                is also a member of the Year 24 Group. She was awarded the Shogakukan Manga Award in
+                                1976 for her science fiction classic Juichinin Iru! (They Were Eleven) and her epic tale
+                                Poe no Ichizoku (The Poe Family).
+                            </div>
+                        </div>
+                        <div class="col-sm-4" style="margin-left: 30px;">
+                            <div class="mangaka-title"
+                                style="font-size: 23px; text-align: center; margin-bottom: 15px;">Important works</div>
+                            <img class="manga-img" style="margin-right: 10px;" src="../imgs/manga_01.png" alt="">
+                            <img class="manga-img" style="margin-left: 10px;" src="../imgs/manga_02.png" alt="">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ------------------------------------- BLOG POSTS ---------------------------------------------->
+                <div class="mangaka-container" style="padding: 20px; margin-bottom: 30px;">
+                    <hr>
+                    <div class="section-title">Recent Blog Posts</div>
+                    <hr>
+                </div>
+
+                <!-- text from server -->
+                <div class="container-fluid">
+                    <a href="/articles/new" class="button-new">New post</a>
+
+                    <div class="row container-fluid">
+                        <% articles.forEach(article=> { %>
+                            <div class="post-container">
+                                <div class="overlay">
+                                    <figure><img class="post-cover" src="<%= article.cover %>" alt="" height="">
+                                    </figure>
+                                </div>
+                                <div class="post-title">
+                                    <%= article.title %>
+                                </div>
+                                <div class="post-date">
+                                    <%= article.date.toLocaleDateString() %>
+                                        <hr style="margin-top: -5px;">
+                                </div>
+                                <div class="post-desc">
+                                    <%= article.description %>
+                                </div>
+                                <div class="container-fluid" style="width: 100%; margin: 0 auto; margin-bottom: 30px;">
+                                    <div class="row">
+                                        <div class="col-sm-2"></div>
+                                        <div class="col-sm-4"><a href="articles/<%= article.slug %>"
+                                                class="btn read-btn">Read more</a></div>
+                                        <div class="col-sm-2">
+                                            <a href="articles/edit/<%= article.id %>" class="btn btn-info"><i
+                                                    class="bi bi-pencil-fill"></i></a>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <!-- Delete post -->
+                                            <form action="/articles/<%=article.id %>?_method=DELETE" method="POST"
+                                                class="d-inline">
+                                                <button
+                                                    onclick="return confirm('Are you sure you want to delete this post?')"
+                                                    type="submit" class="btn btn-danger"><i
+                                                        class="bi bi-trash"></i></button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <% }) %>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+
+
+
+
+
+            <div class="col-sm-4">
+
+                <!-- ----------------------- CATEGORIES ---------------------------->
+                <div class="category-container">
+                    <div style="font-size: 28px;" class="section-title">Categories</div>
+                    <hr>
+
+                    <div class="row container-fluid" style="width: 90%; margin: 0 auto; margin-top: 20px;">
+                        <div class="col-sm-6">
+                            <div class="tag">Recomm</div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="tag" style="background-color: #f3b1cd;">Reviews</div>
+                        </div>
+                    </div>
+                    <div class="row container-fluid" style="width: 90%; margin: 0 auto; margin-top: 15px;">
+                        <div class="col-sm-6">
+                            <div class="tag" style="background-color: #bad5f0;">Discussion</div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="tag" style="background-color: #f0d5ba;">Learning</div>
+                        </div>
+                    </div>
+                    <div class="row container-fluid" style="width: 90%; margin: 0 auto; margin-top: 15px;">
+                        <div class="col-sm-6">
+                            <div class="tag" style="background-color: #c2d5a8;">Staff</div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="tag" style="background-color: #a5d5d5;">Misc</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ----------------------- TOP POSTS ---------------------------->
+                <div class="top-posts-container">
+                    <div style="font-size: 28px;" class="section-title">Top Posts</div>
+                    <hr>
+
+
+                </div>
+
+                <!-- ----------------------- POPULAR TODAY ---------------------------->
+                <div class="top-posts-container">
+                    <div style="font-size: 28px;" class="section-title">Popular Today</div>
+                    <hr>
+                    <div class="row container-fluid" style="width: 100%; margin-top: 5px; margin: 0 auto">
+                        <img class="manga-img2" style="margin-top: 20px;" src="../imgs/manga_03.png" alt="">
+                        <img class="manga-img2" style="margin-top: 20px;" src="../imgs/manga_04.png" alt="">
+                        <img class="manga-img2" style="margin-top: 20px;" src="../imgs/manga_05.png" alt="">
+                        <img class="manga-img2" style="margin-top: 20px;" src="../imgs/manga_06.png" alt="">
+                        <img class="manga-img2" style="margin-top: 20px;" src="../imgs/manga_07.png" alt="">
+                        <img class="manga-img2" style="margin-top: 20px;" src="../imgs/manga_08.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- -------------------------------------------  FOOTER  ------------------------------------------------------->
+    <div class="footer-dark">
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-md-3 item">
+                        <h3>Blog</h3>
+                        <ul>
+                            <li><a href="/">Homepage</a></li>
+                            <li><a href="/articles/new">Create a new post</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6 col-md-3 item">
+                        <h3>About us</h3>
+                        <ul>
+                            <li><a href="../Other pages/About.html">About</a></li>
+                            <li><a href="../Other pages/Contact.html">Contact</a></li>
+                            <li><a href="../Other pages/Store.html">Store</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 item text">
+                        <h3>Ramen Shoppe</h3>
+                        <p>A blog fo all manga realted stuff.</p>
+                    </div>
+                </div>
+                <p class="copyright">Ramen Shoppe © 2021</p>
+            </div>
+        </footer>
+    </div>
+
+
+    <script>
+        window.onscroll = function () { navbarSticky() };
+        var header = document.getElementById("toStick");
+        var sticky = header.offsetTop;
+
+        function navbarSticky() {
+            if (window.pageYOffset > sticky) {
+                header.classList.add("sticky");
+            } else {
+                header.classList.remove("sticky");
+            }
+        }
+    </script>
+
+</body>
+
+</html>
